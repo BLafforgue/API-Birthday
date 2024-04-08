@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BirthdayRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[ORM\Entity(repositoryClass: BirthdayRepository::class)]
 class Birthday
