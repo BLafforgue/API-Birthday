@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use AllowDynamicProperties;
 use App\Entity\Birthday;
 use App\Repository\BirthdayRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route('/api')]
+#[AllowDynamicProperties] #[Route('/api')]
 class BirthdayController extends AbstractController
 {
     #[Route('/birthday', name: 'app_birthday')]
@@ -59,7 +59,6 @@ class BirthdayController extends AbstractController
     #[Route('/birthday', name:"createBirthday", methods: ['POST'])]
     public function createBirthday(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator): JsonResponse
     {
-
         $birthday = $serializer->deserialize($request->getContent(), Birthday::class, 'json');
         $em->persist($birthday);
         $em->flush();
